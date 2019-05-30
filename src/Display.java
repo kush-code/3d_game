@@ -9,6 +9,11 @@ public class Display extends Canvas implements Runnable {
 
     private Thread thread;
     private boolean running = false;
+    private Render render;
+
+    public Display() {
+        render = new Render(WIDTH, HEIGHT);
+    }
 
     private void start() {
         if(running) return;
@@ -32,8 +37,17 @@ public class Display extends Canvas implements Runnable {
 
     public void run() {
         while (running) {
-
+            tick();
+            render();
         }
+    }
+
+    private void tick() {
+
+    }
+
+    private void render() {
+
     }
 
     public static void main(String[] args) {
