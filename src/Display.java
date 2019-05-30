@@ -1,11 +1,40 @@
 
 import javax.swing.*;
 import java.awt.Canvas;
-public class Display extends Canvas {
+public class Display extends Canvas implements Runnable {
 
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
     public static final String TITLE = "Minefront Pre-Alpha 0.01";
+
+    private Thread thread;
+    private boolean running = false;
+
+    private void start() {
+        if(running) return;
+        running = true;
+        thread = new Thread(this);
+        thread.start();
+
+        System.out.println("Working ...");
+    }
+
+    private void stop() {
+        if(!running) return;
+        running = false;
+        try {
+            thread.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+    }
+
+    public void run() {
+        while (running) {
+
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -22,6 +51,6 @@ public class Display extends Canvas {
         frame.setVisible(true);
 
         System.out.println("Running ....");
-
+        game.start();
     }
 }
